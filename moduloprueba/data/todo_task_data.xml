@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="todo.task.category" id="1">
+        <field name="name">Gravedad de reclamación</field>
+    </record>
+    <record model="todo.task.category" id="2">
+        <field name="name">Motivos de reclamación</field>
+    </record>
+    <record model="todo.task.category" id="3">
+        <field name="name">Política de Reclamaciones</field>
+    </record>
+    <record model="todo.task.category" id="4">
+        <field name="name">Llamadas</field>
+    </record>
+    <record model="todo.task.category" id="5">
+        <field name="name">Reuniones</field>
+    </record>
+
+    <record model="utm.campaign" id="todo_task_source1">
+        <field name="name">Corregir</field>
+    </record>
+    <record model="utm.campaign" id="todo_task_source2">
+        <field name="name">Prevenir</field>
+    </record>   
+
+    <record model="todo.task.stage" id="stage1">
+        <field name="name">Nueva</field>
+        <field name="sequence">1</field>
+        <field name="case_default" eval="True"/>
+    </record>
+    <record model="todo.task.stage" id="stage2">
+        <field name="name">Ojeada</field>
+        <field name="sequence">2</field>
+        <field name="case_default" eval="True"/>
+    </record>
+    <record model="todo.task.stage" id="stage3">
+        <field name="name">Solucionada</field>
+        <field name="sequence">3</field>
+        <field name="case_default" eval="True"/>
+    </record>
+    <record model="todo.task.stage" id="stage4">
+        <field name="name">Pendiente</field>
+        <field name="sequence">4</field>
+        <field name="case_default" eval="True"/>
+    </record>
+    <record model="todo.task.stage" id="stage5">
+        <field name="name">Rechazada</field>
+        <field name="sequence">5</field>
+        <field name="case_default" eval="True"/>
+    </record>
+    
+    
+</odoo>

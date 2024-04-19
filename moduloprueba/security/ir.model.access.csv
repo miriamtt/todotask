@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_moduloprueba_task,todo.task,model_todo_task,base.group_user,1,1,1,1
+access_moduloprueba_category,todo.task.category,model_todo_task_category,base.group_user,1,1,1,1
+access_moduloprueba_stage,todo.task.stage,model_todo_task_stage,base.group_user,1,1,1,1
+access_moduloprueba_report,todo.task.report,model_todo_task_report,base.group_user,1,1,1,1

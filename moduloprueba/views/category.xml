@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Declaración de vistas -->
+
+    <record id="task_category_form" model="ir.ui.view">
+        <field name="name">todo.task.category.form</field>
+        <field name="model">todo.task.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="task_category_tree" model="ir.ui.view">
+        <field name="name">todo.task.category.tree</field>
+        <field name="model">todo.task.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Declaración de acciones -->
+
+    <record id="todo_task_category_action" model="ir.actions.act_window">
+        <field name="name"> Categorías de Reclamación </field>
+        <field name="res_model">todo.task.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="task_category_tree"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent">
+                Click para crear una categoría de reclamación.
+            </p>
+            <p>
+            Crea una categoría de reclamación para mejorar el mantenimiento y
+            clasificación de tus reclamaciones. Algunos ejemplos de reclamaciones
+            pueden ser: acción preventiva, corrección correctiva.
+            </p>
+        </field>
+    </record>
+
+    <!-- Declaración de menús -->
+
+
+    <menuitem
+        name="Configuración"
+        id="moduloprueba.menu_3"
+        parent="moduloprueba.menu_root"
+    />
+    
+    <menuitem
+        id="menu_reclamaciones"
+        name="Reclamaciones"
+        parent="moduloprueba.menu_3"
+        
+    />
+
+    <menuitem
+        action="todo_task_category_action"
+        name="Categorías"
+        id="menu_categ_act"
+        parent="menu_reclamaciones"
+        />
+
+
+</odoo>

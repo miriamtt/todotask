@@ -1,0 +1,191 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- explicit list view definition -->
+    
+    <record id="view_todo_task_claims_tree" model="ir.ui.view" >
+      <field name="name">Todo Task - Claims Tree</field>
+      <field name="model">todo.task</field>
+      <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view"/>
+      <field name="arch" type="xml">
+        <data/>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="moduloprueba.list">
+      <field name="name">To-do Task Form</field>
+      <field name="model">todo.task</field>           
+      <field name="arch" type="xml">
+        <tree>
+          <header>
+            <button name="act_do_toggle_done" type="object" string="Toggle Done" class="btn-primary"/>
+            <button name="act_do_clear_done" type="object" string="Clear Done" class="btn-secondary"/>
+          </header>
+          <field name="name"/>
+          <field name="is_done"/>
+          <field name="active" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_filter_todo_task">
+      <field name="name">To-do Task Filter</field>
+      <field name="model">todo.task</field>
+      <field name="arch" type="xml">
+        <search string="Search">
+          <field name="name"/>
+          <filter name="Not Done" domain="[('is_done','=',False)]"/>
+          <filter name="Done" domain="[('is_done','=',True)]"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="view_todo_task_claims_form" model="ir.ui.view">
+      <field name="name">Todo Task - Claims Form</field>
+      <field name="model">todo.task</field>
+      <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='date_deadline']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='partner_id']" position="attributes">
+          <attribute name="string">Applicant</attribute>
+        </xpath>
+        <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='model_ref_id']" position="attributes">
+          <attribute name="name">possible_solution</attribute>  
+          <attribute name="widget">char</attribute>
+        </xpath>
+        <xpath expr="/form/sheet/notebook/page[2]/group/field[@name='date_closed']" position="attributes">
+          <attribute name="invisible">0</attribute>
+          <attribute name="name">time_difference</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="view_todo_task_claims_calendar" model="ir.ui.view">
+      <field name="name">Todo Task - Claims Calendar</field>
+      <field name="model">todo.task</field>
+      <field name="inherit_id" ref="crm_claim.crm_case_claims_calendar_view"/>
+      <field name="arch" type="xml">
+        <data/>
+      </field>
+    </record>
+
+    <record id="view_todo_task_claims_filter" model="ir.ui.view">
+      <field name="name">Todo Task - Claims Search</field>
+      <field name="model">todo.task</field>
+      <field name="inherit_id" ref="crm_claim.view_crm_case_claims_filter"/>
+      <field name="arch" type="xml">
+        <search/>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <!-- Menú : To-Do Task -->
+    <record model="ir.actions.act_window" id="moduloprueba.action_window">
+      <field name="name">To-do Task</field>
+      <field name="res_model">todo.task</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="moduloprueba.list"/>
+      <field name="search_view_id" ref="view_todo_task_claims_filter"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="moduloprueba.action_filter">
+      <field name="name">Filter</field>
+      <field name="res_model">todo.task</field>
+      <field name="view_mode">Search</field>
+      <field name="view_id" ref="view_filter_todo_task"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="moduloprueba.action_treeeeeeeeeeeeeaaaa">
+      <field name="sequence" eval="1" />
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="view_todo_task_claims_tree"/>
+      <field name="act_window_id" ref="moduloprueba.action_window"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="moduloprueba.action_form">
+      <field name="sequence" eval="2" />
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_todo_task_claims_form"/>
+      <field name="act_window_id" ref="moduloprueba.action_window"/>
+    </record>
+
+    <!-- Postventa : Todo Task - Categorías -->
+    <record model="ir.actions.act_window" id="act_todo_task_category">
+      <field name="name"> Todo Task - Categorías </field>
+      <field name="res_model">todo.task</field>
+      <field name="view_mode">tree,calendar,form</field>
+      <field name="view_id" ref="view_todo_task_claims_tree"/>
+      <field name="search_view_id" ref="view_todo_task_claims_filter"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_todo_task_tag_treeaaa">
+      <field name="sequence" eval="1" />
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="view_todo_task_claims_tree"/>
+      <field name="act_window_id" ref="act_todo_task_category" />
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_todo_task_calendary">
+      <field name="sequence" eval="2" />
+      <field name="view_mode">calendar</field>
+      <field name="view_id" ref="view_todo_task_claims_calendar"/>
+      <field name="act_window_id" ref="act_todo_task_category"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_todo_task_tag_form">
+      <field name="sequence" eval="3"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_todo_task_claims_form"/>
+      <field name="act_window_id" ref="act_todo_task_category"/>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem
+    name="moduloprueba"
+    id="moduloprueba.menu_root"
+    />
+
+    <!-- menu categories -->
+
+    <menuitem
+    name="Menú"
+    id="moduloprueba.menu_1"
+    parent="moduloprueba.menu_root"
+    />
+
+    
+    <menuitem
+    name="Postventas"
+    id="moduloprueba.menu_2"
+    parent="moduloprueba.menu_root"
+    />
+
+    <!-- actions -->
+
+    <menuitem
+    name="To-do Tasks"
+    id="moduloprueba.menu_1_list"
+    parent="moduloprueba.menu_1"
+    action="moduloprueba.action_window"
+    />
+
+    <menuitem
+    id="menu_prueba"
+    name="Acciones"
+    parent="moduloprueba.menu_2"
+    sequence="5"
+    />
+
+    <menuitem
+    id="menu_prueba2"
+    name="Reclamaciones"
+    parent="menu_prueba"
+    action="moduloprueba.act_todo_task_category"
+    sequence="1"
+    />
+
+</odoo>
